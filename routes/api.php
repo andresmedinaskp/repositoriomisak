@@ -30,37 +30,37 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Rutas de areas
 Route::get('areas',[AreaController::class,'index']); // con esta ruta puedo ver todas la areas
 Route::post('areas',[AreaController::class,'store']); //con esta ruta puedo registrar una nueva area
-Route::get('areas/{area}',[AreaController::class,'show']); // con esta ruta puedo buscar un area especifica
-Route::put('areas/{area}',[AreaController::class,'update']); // con esta ruta puedo actualizar un area
-Route::delete('areas/{area}',[AreaController::class,'destroy']); // con esta ruta puedo eliminar un area
+Route::get('areas/{id}',[AreaController::class,'show']); // con esta ruta puedo buscar un area especifica
+Route::put('areas/{id}',[AreaController::class,'update']); // con esta ruta puedo actualizar un area
+Route::delete('areas/{id}',[AreaController::class,'destroy']); // con esta ruta puedo eliminar un area
 
 //rutas de author
 Route::get('authors',[AuthorController::class,'index']); // con esta ruta puedo ver todos los autores  
 Route::post('authors',[AuthorController::class,'store']); //con esta ruta puedo registrar una nuevo autor
-Route::get('authors/{author}',[AuthorController::class,'show']); // con esta ruta puedo buscar un author especifico
-Route::put('authors/{author}',[AuthorController::class,'update']); // con esta ruta puedo actualizar un autor
-Route::delete('authors/{author}',[AuthorController::class,'destroy']); // con esta ruta puedo eliminar un autor      
+Route::get('authors/{id}',[AuthorController::class,'show']); // con esta ruta puedo buscar un author especifico
+Route::put('authors/{id}',[AuthorController::class,'update']); // con esta ruta puedo actualizar un autor
+Route::delete('authors/{id}',[AuthorController::class,'destroy']); // con esta ruta puedo eliminar un autor      
 
 //rutas de User
 Route::get('users',[UserController::class,'index']); // con esta ruta puedo ver todos los usuarios
 Route::post('users',[UserController::class,'store']); //con esta ruta puedo registrar una nuevo usuario
-Route::get('users/{user}',[UserController::class,'show']); // con esta ruta puedo buscar un usuario especifico
-Route::put('users/{user}',[UserController::class,'update']); // con esta ruta puedo actualizar un usuario
-Route::delete('users/{user}',[UserController::class,'destroy']); // con esta ruta puedo eliminar un usuario 
+Route::get('users/{id}',[UserController::class,'show']); // con esta ruta puedo buscar un usuario especifico
+Route::put('users/{id}',[UserController::class,'update']); // con esta ruta puedo actualizar un usuario
+Route::delete('users/{id}',[UserController::class,'destroy']); // con esta ruta puedo eliminar un usuario 
 
 //rutas de Editorial
 Route::get('editorials',[EditorialController::class,'index']); // con esta ruta puedo ver todas las editoriales
 Route::post('editorials',[EditorialController::class,'store']); //con esta ruta puedo registrar una nueva editorial
-Route::get('editorials/{editorial}',[EditorialController::class,'show']); // con esta ruta puedo buscar una editorial especifica
-Route::put('editorials/{editorial}',[EditorialController::class,'update']); // con esta ruta puedo actualizar una editorial
-Route::delete('editorials/{editorial}',[EditorialController::class,'destroy']); // con esta ruta puedo eliminar una editorial
+Route::get('editorials/{id}',[EditorialController::class,'show']); // con esta ruta puedo buscar una editorial especifica
+Route::put('editorials/{id}',[EditorialController::class,'update']); // con esta ruta puedo actualizar una editorial
+Route::delete('editorials/{id}',[EditorialController::class,'destroy']); // con esta ruta puedo eliminar una editorial
 
 //rutas de Nivel de educacion
 Route::get('educational_levels',[Educational_LevelController::class,'index']); 
 Route::post('educational_levels',[Educational_LevelController::class,'store']); 
-Route::get('educational_levels/{educational_Level}',[Educational_LevelController::class,'show']); 
-Route::put('educational_levels/{educational_Level}',[Educational_LevelController::class,'update']); 
-Route::delete('educational_levels/{educational_Level}',[Educational_LevelController::class,'destroy']);
+Route::get('educational_levels/{id}',[Educational_LevelController::class,'show']); 
+Route::put('educational_levels/{id}',[Educational_LevelController::class,'update']); 
+Route::delete('educational_levels/{id}',[Educational_LevelController::class,'destroy']);
 
 //rutas de tipos de material
 Route::get('type_materials',[Type_MaterialController::class,'index']);
