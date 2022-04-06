@@ -20,4 +20,11 @@ class Material_User extends Model
         'created_at',
         'updated_at'
     ];
+    public function user(){
+        return $this->belongsTo('App\User','user_id','id');
+    }
+    public function material(){
+        return $this->belongsTo('App\Material','material_id','id');
+    }
+
 }

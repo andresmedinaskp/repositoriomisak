@@ -30,7 +30,7 @@ class User extends Model
         return $this->BelongsTo('App\Rol','user_id','id');
     }
     //relacion de muchos a muchos
-    public function materials(){
-        return $this->belongsToMany('App\Models\Material');
+    public function material(){
+        return $this->hasMany('App\Models\Material_User','material_id','id');
     }
 }

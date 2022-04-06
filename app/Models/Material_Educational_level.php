@@ -16,4 +16,10 @@ class Material_Educational_level extends Model
         'created_at',
         'updated_at'
     ];
+    public function material(){
+        return $this->belongsTo('App\Material','material_id','id');
+    }
+    public function educational_level(){
+        return $this->belongsTo('App\Educational_Level','educational_level_id','id');
+    }
 }

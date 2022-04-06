@@ -17,7 +17,7 @@ class Educational_level extends Model
     ];
 
     //relacion de muchos a muchos
-    public function materials(){
-        return $this->belongsToMany('App\Models\Material');
+    public function material(){
+        return $this->hasMany('App\Models\Material_Educational_Level','educational_level_id','id');
     }
 }

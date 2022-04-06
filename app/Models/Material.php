@@ -27,17 +27,17 @@ class Material extends Model
     ];
 
     //relacion de muchos a muchos
-    public function authors(){
-        return $this->belongsToMany('App\Models\Author');
+    public function author(){
+        return $this->hasMany('App\Models\Author_Material','author_id','id');
     }
 
     //relacion de muchos a muchos
-    public function educational_levels(){
-        return $this->belongsToMany('App\Models\Educational_level');
+    public function educational_level(){
+        return $this->hasMany('App\Models\Material_Educational_level','educational_level_id','id');
     }
      //relacion de muchos a muchos
      public function user(){
-        return $this->belongsToMany('App\Models\User');
+        return $this->hasMany('App\Models\Material_User','user_id','id');
     }
 
     //Relacion de muchos a uno 

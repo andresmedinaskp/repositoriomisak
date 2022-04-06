@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //Rutas de areas
-Route::get('areas',[AreaController::class,'index']); // con esta ruta puedo ver todas la areas
+Route::get('/areas',[AreaController::class,'index']); // con esta ruta puedo ver todas la areas
 Route::post('areas',[AreaController::class,'store']); //con esta ruta puedo registrar una nueva area
 Route::get('areas/{id}',[AreaController::class,'show']); // con esta ruta puedo buscar un area especifica
 Route::put('areas/{id}',[AreaController::class,'update']); // con esta ruta puedo actualizar un area
