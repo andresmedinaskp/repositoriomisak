@@ -16,7 +16,8 @@ class User extends Model
         'document_number',
         'certificate_misak',
         'email',
-        'password'
+        'password',
+        'rol_id'
     ];
     protected $hidden = [
         'created_at',
@@ -25,9 +26,9 @@ class User extends Model
     ];
 
 
-    // relacion de uno a muchos 
+    // relacion de muchos a uno
     public function rol(){
-        return $this->BelongsTo('App\Rol','user_id','id');
+        return $this->hasMany('App\Rol','user_id','id');
     }
     //relacion de muchos a muchos
     public function material(){

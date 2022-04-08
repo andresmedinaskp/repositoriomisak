@@ -36,18 +36,21 @@ class UserController extends Controller
             "document_number" => "required|unique:users",
             "certificate_misak" => "required|unique:users",
             "email" => "required|unique:users",
-            "password" => "reqired"
+            "password" => "required",
+            "rol_id" =>"required"
         ]);
         if(!$validar ->fails()){
             $user = new User();
             
             $user->name = $request ->name;
             $user->full_name = $request ->full_name;
-            $user->documet_type = $request ->documet_type;
+            $user->document_type = $request ->document_type;
             $user->document_number = $request ->document_number;
             $user->certificate_misak = $request ->certificate_misak;
             $user->email = $request ->email;
             $user->password = $request ->password;
+            $user->rol_id = $request->rol_id;
+            
 
             $user->save();
 
@@ -102,7 +105,8 @@ class UserController extends Controller
             "document_number" => "required|unique:users,document_number,".$this->route('user')->id,
             "certificate_misak" => "required|unique:users,certificate_misak,".$this->route('user')->id,
             "email" => "required|unique:users,email,".$this->route('user')->id,
-            "password"
+            "password" => "required",
+            "rol_id" =>"required" //se agrego id rol y se borro de tabla roles
         ]);
 
         if(!$validar->fails()){
@@ -110,11 +114,12 @@ class UserController extends Controller
             if(isset($user)){
                 $user->name = $request ->name;
                 $user->full_name = $request ->full_name;
-                $user->documet_type = $request ->documet_type;
+                $user->document_type = $request ->document_type;
                 $user->document_number = $request ->document_number;
                 $user->certificate_misak = $request ->certificate_misak;
                 $user->email = $request ->email;
                 $user->password = $request ->password;
+                $user->rol_id = $request->rol_id;
 
                 $user->save();
                  return response()->json([
