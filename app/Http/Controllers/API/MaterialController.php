@@ -7,6 +7,7 @@ use App\Models\Material;
 use Illuminate\Validation\Rules\Exist;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 class MaterialController extends Controller
 {
