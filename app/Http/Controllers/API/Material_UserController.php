@@ -108,7 +108,7 @@ class Material_UserController extends Controller
                 $material_user->material_id = $request ->material_id;
                 $material_user->users_id = $request ->users_id;
 
-                $material_user->save();
+                $material->save();
                  return response()->json([
                 'res'=> true,
                 'mensaje' => 'material actualizado' 

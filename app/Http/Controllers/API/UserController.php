@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Validation\Rules\Exist;
-use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Exist;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationServiceProvider;
+use Illuminate\Auth\Event\Logout;
+
 
 class UserController extends Controller
 {
@@ -21,6 +24,98 @@ class UserController extends Controller
         $user = User::all();
         return $user;
     }
+
+    public function register(Request $request)
+    {
+        $validar= Validator::make($request->all(), [
+            "name" => "required|unique:users",
+            "full_name" => "required",
+            "document_type" => "required",
+            "document_number" => "required|unique:users",
+            "certificate_misak" => "required|unique:users",
+            "email" => "required|unique:users",
+            "password" => "required",
+            "rol_id" =>"required"
+        ]);
+        if(!$validar ->fails()){
+            $user = new User();
+
+            $user->name = $request ->name;
+            $user->full_name = $request ->full_name;
+            $user->document_type = $request ->document_type;
+            $user->document_number = $request ->document_number;
+            $user->certificate_misak = $request ->certificate_misak;
+            $user->email = $request ->email;
+            $user->password = Hash::make($request ->password);
+            $user->rol_id = $request->rol_id;
+
+
+            $user->save();
+
+            return response()->json([
+                'res'=> true,
+                'mensaje' => 'Usuario registrado con exito'
+            ]);
+        }else{
+            return response()->json([
+                'res'=> false,
+                'mensaje' => 'error entrada duplicada'
+            ]);
+        }
+    }
+    public function login(Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        $user = User::where('email','=',$request->email)->first();
+        if(isset ($user->id))
+        {
+            if(Hash::check($request->password,$user->password)){
+                $token = $user->createToken('auth_token')->plainTextToken;
+                return response()->json([
+                    'status' => 1,
+                    'msg' => 'Usuario logeado...',
+                    'access_token' => $token
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status' => 0,
+                    'msg' => 'Password Incorrecto'
+                ]);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'status' => 0,
+                'msg' => 'Usuario no Registrado'
+            ]);
+        }
+    }
+
+    public function userProfile()
+    {
+        return response()->json([
+            'status' => 0,
+            'msg' => 'Autenticando usuario',
+            'data' => auth()->user()
+        ]);
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            'status' => 0,
+            'msg' => 'Cierre de sesion exitosa'
+        ]);
+    }
+
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -42,27 +137,27 @@ class UserController extends Controller
         ]);
         if(!$validar ->fails()){
             $user = new User();
-            
+
             $user->name = $request ->name;
             $user->full_name = $request ->full_name;
             $user->document_type = $request ->document_type;
             $user->document_number = $request ->document_number;
             $user->certificate_misak = $request ->certificate_misak;
             $user->email = $request ->email;
-            $user->password = $request ->password;
+            $user->password = $request->password;
             $user->rol_id = $request->rol_id;
-            
+
 
             $user->save();
 
             return response()->json([
                 'res'=> true,
-                'mensaje' => 'Usuario guardado' 
+                'mensaje' => 'Usuario guardado'
             ]);
         }else{
             return response()->json([
                 'res'=> false,
-                'mensaje' => 'error entrada duplicada' 
+                'mensaje' => 'error entrada duplicada'
             ]);
         }
     }
@@ -80,12 +175,12 @@ class UserController extends Controller
         if (isset($user)){
             return response()->json([
                 'res'=> true,
-                'user' => $user 
+                'user' => $user
             ]);
         }else{
             return response()->json([
                 'res'=> false,
-                'mensaje' => 'registro no encontrado' 
+                'mensaje' => 'registro no encontrado'
             ]);
         }
     }
@@ -125,7 +220,7 @@ class UserController extends Controller
                 $user->save();
                  return response()->json([
                 'res'=> true,
-                'mensaje' => 'Usuario actualizado' 
+                'mensaje' => 'Usuario actualizado'
             ]);
 
             }else{
@@ -160,82 +255,5 @@ class UserController extends Controller
                 'mensaje' => 'falla al elimar no se encontro registro'
             ]);
         }
-    }
-    public function register(Request $request) {
-        $request->validate([
-            'name' => 'required',
-            'full_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'            
-        ]);
-
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->full_name = $request->full_name;
-        $user->document_type = $request->document_type;
-        $user->document_number = $request->document_number;
-        $user->certificate_misak = $request->certificate_misak;
-        $user->password = Hash::make($request->password);
-        $user->save();
-        
-
-        return response()->json([
-            "status" => 1,
-            "msg" => "¡Registro de usuario exitoso!",
-        ]);    
-    }
-
-
-    public function login(Request $request) {
-
-        $request->validate([
-            "email" => "required|email",
-            "password" => "required"
-        ]);
-
-        $user = User::where("email", "=", $request->email)->first();
-        // revisamos si el id es existente
-        if( isset($user->id) ){
-            // revisamos la encriptacion
-            if(Hash::check($request->password, $user->password)){
-                //creamos el token
-                $token = $user->createToken("auth_token")->plainTextToken;
-                //si está todo es correcto
-                return response()->json([
-                    "status" => 1,
-                    "msg" => "usuario correctamente logeado",
-                    "access_token" => $token
-                ]);        
-            }else{
-                return response()->json([
-                    "status" => 0,
-                    "msg" => "password incorrecto",
-                ]);    
-            }
-
-        }else{
-            return response()->json([
-                "status" => 0,
-                "msg" => "Usuario no registrado",
-            ]);  
-        }
-    }
-
-    public function userProfile() {
-        return response()->json([
-            "status" => 0,
-            "msg" => "Acerca del perfil de usuario",
-            "data" => auth()->user()
-        ]); 
-    }
-
-    public function logout() {
-        auth()->user()->tokens()->delete();
-        
-        return response()->json([
-            "status" => 1,
-            "msg" => "Cierre de Sesión",            
-        ]); 
     }
 }
