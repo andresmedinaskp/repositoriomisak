@@ -59,6 +59,7 @@ class UserController extends Controller
             ]);
         }else{
             return response()->json([
+                'status' => 0,
                 'res'=> false,
                 'mensaje' => 'error entrada duplicada'
             ]);
