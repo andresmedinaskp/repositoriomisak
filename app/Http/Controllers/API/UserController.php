@@ -53,6 +53,7 @@ class UserController extends Controller
             $user->save();
 
             return response()->json([
+                'status' => 1,
                 'res'=> true,
                 'mensaje' => 'Usuario registrado con exito'
             ]);
