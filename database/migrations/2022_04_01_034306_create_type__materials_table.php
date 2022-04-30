@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTypeMaterialsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('type__materials', function (Blueprint $table) {
@@ -20,11 +16,6 @@ class CreateTypeMaterialsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('type__materials');

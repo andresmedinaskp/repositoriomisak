@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMaterialUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('material__users', function (Blueprint $table) {
@@ -28,11 +23,6 @@ class CreateMaterialUsersTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('material__users');

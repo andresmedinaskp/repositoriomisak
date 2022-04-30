@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAuthorMaterialsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('author__materials', function (Blueprint $table) {
@@ -26,11 +21,6 @@ class CreateAuthorMaterialsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('author__materials');
