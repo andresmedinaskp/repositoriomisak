@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+// tabla de Maestro detalle entre material y usuario para saber las visualizaciones y desfcargas del material
 class CreateMaterialUsersTable extends Migration
 {
     public function up()
@@ -15,9 +15,10 @@ class CreateMaterialUsersTable extends Migration
             $table->dateTime('date_download');
             $table->timestamps();
             
+            //llave de material
             $table->unsignedBigInteger('material_id');
             $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade')->onUpdate('cascade');
-
+            //llave de usuarios
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });

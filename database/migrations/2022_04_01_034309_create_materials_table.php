@@ -19,12 +19,15 @@ class CreateMaterialsTable extends Migration
             $table->string('pdf');
             $table->string('img');
 
+            // llave para asiganarle un tipo de material  
             $table->unsignedBigInteger('type_material_id');
             $table->foreign('type_material_id')->references('id')->on('type__materials')->onDelete('cascade')->onUpdate('cascade');
 
+            // llave para asiganarle una editorial
             $table->unsignedBigInteger('editorial_id');
             $table->foreign('editorial_id')->references('id')->on('editorials')->onDelete('cascade')->onUpdate('cascade');
 
+            // llave para asiganarle un area
             $table->unsignedBigInteger('area_id');
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade')->onUpdate('cascade');
 
