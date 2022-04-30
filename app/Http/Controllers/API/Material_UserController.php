@@ -10,23 +10,14 @@ use Illuminate\Http\Request;
 
 class Material_UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         $material_user = Material_User::all();
         return $material_user;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
         $validar= Validator::make($request->all(), [
@@ -58,13 +49,6 @@ class Material_UserController extends Controller
             ]);
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $material_user = Material_User::where('id',$id)
@@ -82,13 +66,6 @@ class Material_UserController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $validar= Validator::make($request->all(), [
@@ -124,13 +101,6 @@ class Material_UserController extends Controller
             return "entrada duplicada";
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, $id)
     {
         $material_user = Material_User::find($id);

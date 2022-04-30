@@ -10,23 +10,13 @@ use Illuminate\Http\Request;
 
 class Educational_LevelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $educational_level =Educational_Level::all();
         return $educational_level;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         $validar= Validator::make($request->all(), [
@@ -51,12 +41,7 @@ class Educational_LevelController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function show($id)
     {
         $educational_level = Educational_level::where('id',$id)
@@ -74,13 +59,7 @@ class Educational_LevelController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request,$id)
     {
         $validar= Validator::make($request->all(), [
@@ -109,12 +88,7 @@ class Educational_LevelController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy(Request $request, $id)
     {
         $educational_level = Educational_level::find($id);
