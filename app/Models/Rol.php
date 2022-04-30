@@ -11,7 +11,6 @@ class Rol extends Model
     protected $table="rols";
     protected $fillable = [
         'name'
-        // 'user_id'
     ];
     protected $hidden = [
         'created_at',
