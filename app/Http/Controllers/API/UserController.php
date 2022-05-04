@@ -78,7 +78,9 @@ class UserController extends Controller
                 return response()->json([
                     'status' => 1,
                     'msg' => 'Usuario logeado...',
-                    'access_token' => $token
+                    'access_token' => $token,
+                    'user_id' => $user->id,
+                    'rolusr' => $user->rol_id,
                 ]);
             }
             else
