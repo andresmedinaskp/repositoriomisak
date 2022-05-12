@@ -21,8 +21,8 @@ class Author_MaterialController extends Controller
     public function store(Request $request)
     {
         $validar= Validator::make($request->all(), [
-            'author_id'=> 'required|unique:author__materials',
-            'material_id'=> 'required|unique:author__materials'
+            'author_id'=> 'required',
+            'material_id'=> 'required'
         ]);
         if(!$validar ->fails()){
             $author_material = new Author_material();
